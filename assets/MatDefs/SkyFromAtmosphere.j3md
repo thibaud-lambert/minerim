@@ -1,0 +1,36 @@
+MaterialDef SpaceFromAtmosphere {
+
+    MaterialParameters {
+	Vector3 camPos;
+	Vector3 sunDir;
+	Float sunIntensity;
+	Vector3 betaR;			// Rayleigh scattering coefficients at sea level
+	Float betaM;			// Mie scattering coefficients at sea level
+	Float g;			// Mean cosine
+	Float innerRadius;		// Earth radius
+	Float outerRadius;		// Atmosphere radius
+	Float Hr;			// Rayleigh scale height
+	Float Hm;			// Mie scale height
+	Float rand;
+	Vector3 wavelengthFact;
+    }
+
+    Technique {
+        VertexShader GLSL110:   MatDefs/SkyFromAtmosphere.vert
+        FragmentShader GLSL110: MatDefs/SkyFromAtmosphere.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            WorldMatrix
+            Position
+        }
+
+        RenderState {
+            FaceCull Front
+            //Blend AlphaAdditive
+            DepthTest On
+            DepthWrite On
+        }
+    }
+
+}
